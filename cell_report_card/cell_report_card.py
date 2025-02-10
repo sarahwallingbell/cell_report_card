@@ -2,6 +2,7 @@ import os
 import pandas as pd
 from datetime import datetime
 from morph_utils.query import default_query_engine
+from importlib.resources import files
 
 
 def get_cell_report_card(q1_path, q2_path, query_engine=None):
@@ -65,17 +66,19 @@ def get_cell_report_card(q1_path, q2_path, query_engine=None):
     return cell_report_card_df
 
 
-def main():
+def main(root_path=r'\\allen\programs\celltypes\workgroups\mousecelltypes\cell_report_card'):
 
     # Run Cell Report Card query 
     print('Running cell report card query...')
-    q1_path = r"\\allen\programs\celltypes\workgroups\mousecelltypes\SarahWB\github_projects\cell_report_card\cell_report_card_query_1.sql"
-    q2_path = r"\\allen\programs\celltypes\workgroups\mousecelltypes\SarahWB\github_projects\cell_report_card\cell_report_card_query_2.sql"
+    q1_path = files('cell_report_card') / 'data/cell_report_card_query_1.sql'
+    q2_path = files('cell_report_card') / 'data/cell_report_card_query_2.sql'
+    # q1_path = r"\\allen\programs\celltypes\workgroups\mousecelltypes\SarahWB\github_projects\cell_report_card\cell_report_card_query_1.sql"
+    # q2_path = r"\\allen\programs\celltypes\workgroups\mousecelltypes\SarahWB\github_projects\cell_report_card\cell_report_card_query_2.sql"
     cell_report_card = get_cell_report_card(q1_path, q2_path)
 
     # Save Locally 
     print('Saving results...')
-    root_path = r'\\allen\programs\celltypes\workgroups\mousecelltypes\cell_report_card'
+    # root_path = r'\\allen\programs\celltypes\workgroups\mousecelltypes\cell_report_card'
     cell_report_card.to_csv(os.path.join(root_path, 'cell_report_card.csv'), index=False)
     cell_report_card.to_csv(os.path.join(root_path, 'cell_report_card.xlsx'), index=False)
     current_date = datetime.now().strftime('%Y%m%d')
