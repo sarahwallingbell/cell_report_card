@@ -70,18 +70,18 @@ def main():
 
     # Run Cell Report Card query 
     print('Running cell report card query...')
-    q1_path = r"\\allen\programs\celltypes\workgroups\mousecelltypes\SarahWB\github_projects\cell_report_card\cell_report_card_query_1.sql"
-    q2_path = r"\\allen\programs\celltypes\workgroups\mousecelltypes\SarahWB\github_projects\cell_report_card\cell_report_card_query_2.sql"
+    q1_path = r"\\allen\programs\celltypes\workgroups\mousecelltypes\SarahWB\github_projects\cell_report_card\cell_report_card\cell_report_card_query_1.sql"
+    q2_path = r"\\allen\programs\celltypes\workgroups\mousecelltypes\SarahWB\github_projects\cell_report_card\cell_report_card\cell_report_card_query_2.sql"
     cell_report_card = get_cell_report_card(q1_path, q2_path)
 
     # Save Locally 
     print('Saving results...')
     root_path = r'\\allen\programs\celltypes\workgroups\mousecelltypes\cell_report_card'
     cell_report_card.to_csv(os.path.join(root_path, 'cell_report_card.csv'), index=False)
-    cell_report_card.to_csv(os.path.join(root_path, 'cell_report_card.xlsx'), index=False)
+    # cell_report_card.to_csv(os.path.join(root_path, 'cell_report_card.xlsx'), index=False)
     current_date = datetime.now().strftime('%Y%m%d')
     cell_report_card.to_csv(os.path.join(root_path, 'archive', f'cell_report_card_{current_date}.csv'), index=False)
-    cell_report_card.to_csv(os.path.join(root_path, 'archive', f'cell_report_card_{current_date}.xlsx'), index=False)
+    # cell_report_card.to_csv(os.path.join(root_path, 'archive', f'cell_report_card_{current_date}.xlsx'), index=False)
 
     print('Done!\n')
 
