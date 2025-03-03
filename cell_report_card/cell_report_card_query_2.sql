@@ -261,12 +261,12 @@
     select distinct
     proj.code as project
     ,cell.cell_specimen_id
-    ,'=HYPERLINK("http://lims2/specimens?id=' || cell.cell_specimen_id || '")' as link_cell
+    ,'http://lims2/specimens?id=' || cell.cell_specimen_id as link_cell
     ,cell.cell_specimen_name as cell
     ,cell_type.cell_type
     ,cell.hemisphere
     ,cell.flipped
-    ,'=HYPERLINK("http://lims2/specimens?search[name]=' || replace(slice.name, ';', '%3B') || '")' as link_slice
+    ,'http://lims2/specimens?search[name]=' || replace(slice.name, ';', '%3B') as link_slice
     ,cell.slice_histology_well
     ,cell.slice_biocytin_well
     ,sl20x.barcode
@@ -295,13 +295,13 @@
     ,psw.annotations as psw_annotations
     ,cortlayer.annotations as layer_annotations
     ,imgs20.tags
-    ,'=HYPERLINK("http://lims2/focal_plane_image_series?id=' || imgs20.image_series_id || '")' as link_20x
+    ,'http://lims2/focal_plane_image_series?id=' || imgs20.image_series_id as link_20x
     ,check_slide.value
     ,do_63x.go
     ,started_63x.started
     ,imgs63.image_series_id as image_series_63x_id
     ,imgs63.workflow_state as image_series_63x_qc
-    ,'=HYPERLINK("http://lims2/focal_plane_image_series?id=' || imgs63.image_series_id || '")' as link_63x
+    ,'http://lims2/focal_plane_image_series?id=' || imgs63.image_series_id as link_63x
     ,case when mthmb.ephys_roi_result_id is not null then 'morph thumb' else '' end as has_morph_thumb
     , thumb.storage_directory || thumb.filename as MorphologyThumbnail
     , hres_thumb.storage_directory || hres_thumb.filename as HighResMorphologyThumbnail
@@ -319,7 +319,7 @@
     ,swc.marker_filename
     ,swc.published_at
     ,cell.disease_state
-    ,'=HYPERLINK("http://lims2/siv?sub_image=' || mip.mip_id || '")' as mip_link
+    ,'http://lims2/siv?sub_image=' || mip.mip_id as mip_link
     ,cell_soma_location.depth_from_pia as depth_from_pia
     ,na_objective.value
     from cells cell
