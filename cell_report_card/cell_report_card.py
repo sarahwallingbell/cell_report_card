@@ -59,6 +59,15 @@ def get_cell_report_card(q1_path, q2_path, query_engine=None):
     # Stack the unique q1 cells, filtered duplicated q1 cells, and q2 cells
     cell_report_card_df = pd.concat([q1_df_unique, q1_df_duplicates, q2_df], ignore_index=True)
 
+    # Convert floats to ints
+    cols = ['barcode',
+    'slice_specimen_id',
+    'ephys_roi_result_id',
+    'image_series_20x_id',
+    'pos_in_spec',
+    'image_series_63x_id']
+    cell_report_card_df[cols] = cell_report_card_df[cols].where(pd.isna(cell_report_card_df[cols]), cell_report_card_df[cols].astype("Int64"))
+
     # Set type for full df to string for saving to Access db
     cell_report_card_df = cell_report_card_df.fillna("")
     cell_report_card_df = cell_report_card_df.astype(str)
