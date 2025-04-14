@@ -86,11 +86,18 @@ def main():
     # Save Locally 
     print('Saving results...')
     root_path = r'\\allen\programs\celltypes\workgroups\mousecelltypes\cell_report_card'
-    cell_report_card.to_csv(os.path.join(root_path, 'cell_report_card.csv'), index=False)
-    cell_report_card.to_excel(os.path.join(root_path, 'cell_report_card.xlsx'), index=False)
+    try: 
+        cell_report_card.to_csv(os.path.join(root_path, 'cell_report_card.csv'), index=False)
+        cell_report_card.to_excel(os.path.join(root_path, 'cell_report_card.xlsx'), index=False)
+    except: 
+        print('Could not save cell_report_card. Likely its open by another user.')
+
     current_date = datetime.now().strftime('%Y%m%d')
-    cell_report_card.to_csv(os.path.join(root_path, 'archive', f'cell_report_card_{current_date}.csv'), index=False)
-    cell_report_card.to_excel(os.path.join(root_path, 'archive', f'cell_report_card_{current_date}.xlsx'), index=False)
+    try: 
+        cell_report_card.to_csv(os.path.join(root_path, 'archive', f'cell_report_card_{current_date}.csv'), index=False)
+        cell_report_card.to_excel(os.path.join(root_path, 'archive', f'cell_report_card_{current_date}.xlsx'), index=False)
+    except: 
+        print(f'Could not save cell_report_card_{current_date}.')
 
     print('Done!\n')
 
