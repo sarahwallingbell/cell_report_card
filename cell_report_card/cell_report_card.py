@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 import pandas as pd
 from datetime import datetime
 from morph_utils.query import default_query_engine
@@ -79,13 +80,14 @@ def main():
 
     # Run Cell Report Card query 
     print('Running cell report card query...')
-    q1_path = r"\\allen\programs\celltypes\workgroups\mousecelltypes\SarahWB\github_projects\cell_report_card\cell_report_card\cell_report_card_query_1.sql"
-    q2_path = r"\\allen\programs\celltypes\workgroups\mousecelltypes\SarahWB\github_projects\cell_report_card\cell_report_card\cell_report_card_query_2.sql"
+    script_dir = Path(__file__).parent
+    q1_path = script_dir / "cell_report_card_query_1.sql"
+    q2_path = script_dir / "cell_report_card_query_2.sql"
     cell_report_card = get_cell_report_card(q1_path, q2_path)
 
     # Save Locally 
     print('Saving results...')
-    root_path = r'\\allen\programs\celltypes\workgroups\mousecelltypes\cell_report_card'
+    root_path = Path("/allen/programs/celltypes/workgroups/mousecelltypes/cell_report_card")
     try: 
         cell_report_card.to_csv(os.path.join(root_path, 'cell_report_card.csv'), index=False)
         cell_report_card.to_excel(os.path.join(root_path, 'cell_report_card.xlsx'), index=False)
